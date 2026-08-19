@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DruVictor'X' Royal Verifier</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#050505;
+    color:#ead9a0;
+    font-family:Arial,sans-serif;
+}
+
+header{text-align:center;padding:35px 15px 20px}
+
+.logo{
+    font-size:44px;
+    font-weight:800;
+    letter-spacing:3px;
+    color:#d4af37;
+}
+
+.tag{
+    margin-top:7px;
+    color:#8e7738;
+    font-size:11px;
+    letter-spacing:3px;
+}
+
+.author{
+    margin-top:13px;
+    color:#d4af37;
+    font-weight:700;
+}
+
+#language{
+    margin-top:18px;
+    background:#090909;
+    color:#e8d49a;
+    border:1px solid #66521f;
+    padding:11px;
+    border-radius:8px;
+    width:230px;
+}
+
+.container{
+    width:92%;
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:#0b0b0b;
+    border:1px solid #5d491b;
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 20px 60px #000;
+}
+
+.modes{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.mode{
+    flex:1;
+    padding:15px;
+    border-radius:9px;
+    border:1px solid #5d491b;
+    background:#080808;
+    color:#c6ae69;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.mode.active{
+    background:linear-gradient(135deg,#9b7317,#f1d05b,#b68a20);
+    color:#050505;
+}
+
+h2{color:#d4af37}
+
+.description{
+    color:#a99b72;
+    line-height:1.7;
+}
+
+input,textarea{
+    width:100%;
+    background:#050505;
+    color:#f1e4bd;
+    border:1px solid #5d491b;
+    border-radius:9px;
+    padding:16px;
+    margin:12px 0;
+    font:inherit;
+    outline:none;
+}
+
+textarea{
+    height:250px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#d4af37;
+}
+
+.verify{
+    width:100%;
+    padding:17px;
+    border:0;
+    border-radius:9px;
+    background:linear-gradient(135deg,#9b7317,#f1d05b,#b68a20);
+    color:#050505;
+    font-weight:800;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.hidden{display:none}
+
+.result{
+    display:none;
+    margin-top:25px;
+    padding:25px;
+    border-radius:15px;
+}
+
+.result.safe{
+    background:#07150b;
+    border:1px solid #3d9b5b;
+}
+
+.result.warn{
+    background:#211603;
+    border:1px solid #d69a22;
+}
+
+.result.danger{
+    background:#210806;
+    border:1px solid #d64032;
+}
+
+.result.info{
+    background:#101318;
+    border:1px solid #64748b;
+}
+
+.result.gov{
+    background:#07150c;
+    border:1px solid #36a86b;
+}
+
+.status{
+    text-align:center;
+    font-size:24px;
+    font-weight:800;
+}
+
+.safeText{color:#55e884}
+.warnText{color:#ffd34d}
+.dangerText{color:#ff5c50}
+.infoText{color:#8fc7ff}
+.govText{color:#4de095}
+
+.score{
+    text-align:center;
+    font-size:46px;
+    font-weight:800;
+    margin:15px;
+}
+
+.infoRow{
+    border-bottom:1px solid #29210d;
+    padding:13px 0;
+}
+
+.label{
+    color:#857653;
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.value{
+    color:#eee0b5;
+    font-weight:700;
+    margin-top:5px;
+}
+
+.indicator{
+    padding:10px;
+    margin:7px 0;
+    border-radius:7px;
+    font-weight:700;
+}
+
+.indicator.high{
+    color:#ff6b60;
+    background:#300b08;
+}
+
+.indicator.medium{
+    color:#ffd34d;
+    background:#302305;
+}
+
+.indicator.low{
+    color:#55e884;
+    background:#092616;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:25px;
+}
+
+.actions a{
+    flex:1;
+    padding:15px;
+    border-radius:9px;
+    text-align:center;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.emigrate{
+    background:#d4af37;
+    color:#050505;
+}
+
+.report{
+    background:#42140f;
+    color:#f0dca5;
+}
+
+.note{
+    text-align:center;
+    color:#807250;
+    font-size:11px;
+    line-height:1.7;
+    margin-top:20px;
+}
+
+footer{
+    text-align:center;
+    padding:35px;
+    color:#665522;
+    font-size:11px;
+}
+
+@media(max-width:650px){
+    .modes,.actions{flex-direction:column}
+    .logo{font-size:34px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">DruVictor'X'</div>
+
+<div class="tag">
+ROYAL VERIFIER • SAFE MIGRATION
+</div>
+
+<div class="author">
+By Hananya Krishna
+</div>
+
+<select id="language">
+<option>🇮🇳 English</option>
+<option>🇮🇳 हिन्दी</option>
+<option>🇮🇳 తెలుగు</option>
+</select>
+
+</header>
+
+
+<div class="container">
+<div class="card">
+
+<div class="modes">
+
+<button id="websiteMode" class="mode active">
+🔗 VERIFY WEBSITE
+</button>
+
+<button id="adMode" class="mode">
+📄 VERIFY ADVERTISEMENT
+</button>
+
+</div>
+
+
+<!-- WEBSITE -->
+
+<section id="websiteSection">
+
+<h2>🔎 Verify Job Website</h2>
+
+<p class="description">
+Enter a website URL. DruVictor'X' checks the domain format and attempts to inspect the website.
+</p>
+
+<input
+id="websiteURL"
+type="text"
+placeholder="https://example.com">
+
+<button
+type="button"
+class="verify"
+id="websiteButton">
+
+🔐 VERIFY WEBSITE
+
+</button>
+
+</section>
+
+
+<!-- ADVERTISEMENT -->
+
+<section id="advertisementSection" class="hidden">
+
+<h2>📄 Verify Job Advertisement</h2>
+
+<p class="description">
+Paste the complete job advertisement. Analysis works offline.
+</p>
+
+<textarea
+id="advertisementText"
+placeholder="Paste the complete job advertisement here..."></textarea>
+
+<button
+type="button"
+class="verify"
+id="advertisementButton">
+
+🔐 VERIFY ADVERTISEMENT
+
+</button>
+
+</section>
+
+
+<div id="result" class="result"></div>
+
+</div>
+</div>
+
+
+<footer>
+DruVictor'X' © 2026
+<br><br>
+Science & Innovation for Sustainability
+<br>
+Application of Indian Knowledge Systems for Sustainability
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+ELEMENTS
+===================================================== */
+
+const websiteMode=document.getElementById("websiteMode");
+const adMode=document.getElementById("adMode");
+
+const websiteSection=document.getElementById("websiteSection");
+const advertisementSection=document.getElementById("advertisementSection");
+
+const websiteButton=document.getElementById("websiteButton");
+const advertisementButton=document.getElementById("advertisementButton");
+
+const websiteURL=document.getElementById("websiteURL");
+const advertisementText=document.getElementById("advertisementText");
+
+const result=document.getElementById("result");
+
+
+/* =====================================================
+MODE SWITCH
+===================================================== */
+
+websiteMode.onclick=function(){
+
+    websiteSection.classList.remove("hidden");
+    advertisementSection.classList.add("hidden");
+
+    websiteMode.classList.add("active");
+    adMode.classList.remove("active");
+
+    result.style.display="none";
+};
+
+
+adMode.onclick=function(){
+
+    websiteSection.classList.add("hidden");
+    advertisementSection.classList.remove("hidden");
+
+    websiteMode.classList.remove("active");
+    adMode.classList.add("active");
+
+    result.style.display="none";
+};
+
+
+/* =====================================================
+RULES
+===================================================== */
+
+const RULES={
+
+job:[
+"job",
+"employment",
+"salary",
+"hiring",
+"vacancy",
+"recruitment",
+"work from home",
+"data entry",
+"career",
+"position",
+"job title",
+"work from home",
+"नौकरी",
+"रोजगार",
+"वेतन",
+"भर्ती",
+"रिक्ति",
+"काम",
+"उपाधि",
+"ఉద్యోగం",
+"ఉపాధి",
+"జీతం",
+"నియామకం",
+"ఖాళీ"
+],
+
+payment:[
+"processing fee",
+"registration fee",
+"advance payment",
+"security deposit",
+"visa fee",
+"joining fee",
+"application fee",
+"starter kit",
+"background verification fee",
+"background check fee",
+"pay before",
+"send money",
+"payment required",
+"प्रोसेसिंग फीस",
+"रजिस्ट्रेशन फीस",
+"अग्रिम भुगतान",
+"सिक्योरिटी डिपॉजिट",
+"वीजा फीस",
+"जॉइनिंग फीस",
+"आवेदन शुल्क",
+"पहले भुगतान",
+"पैसे भेजें",
+"ప్రాసెసింగ్ ఫీజు",
+"ముందస్తు చెల్లింపు",
+"సెక్యూరిటీ డిపాజిట్"
+],
+
+experience:[
+"no experience",
+"no prior experience",
+"no experience required",
+"without experience",
+"basic data entry",
+"unskilled",
+"अनुभव आवश्यक नहीं",
+"बिना अनुभव",
+"कोई अनुभव नहीं",
+"అనుభవం అవసరం లేదు",
+"ముందస్తు అనుభవం అవసరం లేదు"
+],
+
+urgency:[
+"urgent",
+"apply today",
+"limited seats",
+"hurry",
+"act now",
+"start immediately",
+"immediately",
+"join immediately",
+"तुरंत",
+"अभी आवेदन करें",
+"जल्दी करें",
+"तुरंत जॉइन करें",
+"వెంటనే",
+"తక్షణం"
+],
+
+messaging:[
+"whatsapp only",
+"telegram only",
+"contact only on whatsapp",
+"contact only on telegram",
+"dm us",
+"message us only",
+"केवल व्हाट्सऐप",
+"केवल टेलीग्राम",
+"व्हाट्सऐप",
+"टेलीग्राम",
+"వాట్సాప్",
+"టెలిగ్రామ్"
+],
+
+personal:[
+"date of birth",
+"home address",
+"passport number",
+"passport details",
+"aadhaar",
+"aadhar",
+"bank account",
+"bank details",
+"credit card",
+"debit card",
+"जन्म तिथि",
+"घर का पता",
+"पासपोर्ट नंबर",
+"आधार",
+"बैंक विवरण",
+"పుట్టిన తేదీ",
+"ఇంటి చిరునామా",
+"పాస్‌పోర్ట్ నంబర్",
+"ఆధార్",
+"బ్యాంక్ వివరాలు"
+],
+
+danger:[
+".apk",
+".exe",
+".scr",
+".bat",
+"download apk",
+"download exe",
+"disable antivirus",
+"disable security",
+"unknown software"
+],
+
+review:[
+"5-star",
+"5 star",
+"five-star",
+"five star",
+"positive review",
+"fake review",
+"buy the product",
+"purchase the product",
+"review and earn",
+"product review",
+"प्रोडक्ट खरीदें",
+"5-स्टार",
+"5 स्टार",
+"प्रोडक्ट रिव्यू",
+"రివ్యూ",
+"ప్రొడక్ట్ కొనండి"
+],
+
+foreign:[
+"foreign",
+"overseas",
+"abroad",
+"international",
+"विदेश",
+"विदेशी",
+"विदेश में नौकरी",
+"విదేశీ",
+"విదేశాల్లో",
+"అంతర్జాతీయ"
+]
+
+};
+
+
+/* =====================================================
+HELPERS
+===================================================== */
+
+function containsAny(text,list){
+
+    return list.some(function(word){
+        return text.includes(word);
+    });
+
+}
+
+
+function showMessage(icon,message){
+
+    result.className="result warn";
+
+    result.style.display="block";
+
+    result.innerHTML=
+
+    `<div class="status warnText">${icon}</div>
+     <p class="note">${message}</p>`;
+
+}
+
+
+/* =====================================================
+ADVERTISEMENT VERIFY
+===================================================== */
+
+advertisementButton.onclick=function(){
+
+    const original=
+    advertisementText.value.trim();
+
+    if(!original){
+
+        showMessage(
+            "⚠️",
+            "Please paste the complete job advertisement."
+        );
+
+        return;
+    }
+
+
+    result.className="result info";
+
+    result.style.display="block";
+
+    result.innerHTML=
+    `<div class="status infoText">
+    ⏳ ANALYZING...
+    </div>`;
+
+
+    setTimeout(function(){
+
+        analyzeAdvertisement(original);
+
+    },250);
+
+};
+
+
+/* =====================================================
+ADVERTISEMENT ENGINE
+===================================================== */
+
+function analyzeAdvertisement(original){
+
+    const text=original.toLowerCase();
+
+    let score=0;
+
+    let indicators=[];
+
+
+    /*
+    IMPORTANT FIX:
+
+    Random text is NOT considered
+    a job advertisement.
+    */
+
+    const jobDetected=
+    containsAny(text,RULES.job);
+
+
+    /*
+    Also recognize common job-ad structures.
+    */
+
+    const jobStructure=
+    /salary|₹|rs\.?|per day|per hour|apply|requirements|qualification|hiring|vacancy|job description|आवेदन|योग्यता|वेतन|ఉద్యోగం|జీతం/i
+    .test(text);
+
+
+    if(!jobDetected && !jobStructure){
+
+        showInsufficient();
+
+        return;
+    }
+
+
+    /* PAYMENT */
+
+    if(containsAny(text,RULES.payment)){
+
+        score+=28;
+
+        indicators.push(
+            ["💰","Upfront payment requested","high"]
+        );
+    }
+
+
+    /* FAKE REVIEW */
+
+    if(containsAny(text,RULES.review)){
+
+        score+=25;
+
+        indicators.push(
+            ["⭐","Product-review manipulation indicator","high"]
+        );
+    }
+
+
+    /* EXPERIENCE */
+
+    if(containsAny(text,RULES.experience)){
+
+        score+=8;
+
+        indicators.push(
+            ["📋","No/low experience requirement","medium"]
+        );
+    }
+
+
+    /* MESSAGING */
+
+    if(containsAny(text,RULES.messaging)){
+
+        score+=10;
+
+        indicators.push(
+            ["📱","Messaging-app-only contact","medium"]
+        );
+    }
+
+
+    /* URGENCY */
+
+    if(containsAny(text,RULES.urgency)){
+
+        score+=8;
+
+        indicators.push(
+            ["⏱️","Urgency language","medium"]
+        );
+    }
+
+
+    /* PERSONAL DATA */
+
+    if(containsAny(text,RULES.personal)){
+
+        score+=10;
+
+        indicators.push(
+            ["🔐","Sensitive personal information requested","high"]
+        );
+    }
+
+
+    /* FOREIGN */
+
+    const foreign=
+    containsAny(text,RULES.foreign);
+
+
+    /* LICENSE */
+
+    const hasLicense=
+    /mea|emigrate|recruiting agent|ra licence|ra license|license number|licence number|लाइसेंस|लाइसेंस नंबर|లైసెన్స్/i
+    .test(text);
+
+
+    /*
+    Missing licence only matters
+    when this is actually a job advertisement.
+    */
+
+    if(!hasLicense){
+
+        score+=8;
+
+        indicators.push(
+            ["📋","No recruitment licence information","medium"]
+        );
+    }
+
+
+    /* WEBSITE */
+
+    const hasWebsite=
+    /https?:\/\/|www\./i
+    .test(text);
+
+
+    if(!hasWebsite){
+
+        score+=5;
+
+        indicators.push(
+            ["🌐","No official website provided","medium"]
+        );
+    }
+
+
+    /* DANGEROUS FILE */
+
+    if(containsAny(text,RULES.danger)){
+
+        score+=30;
+
+        indicators.push(
+            ["💻","Dangerous file/software indicator","high"]
+        );
+    }
+
+
+    score=Math.min(score,100);
+
+
+    let css;
+    let textClass;
+    let verdict;
+    let icon;
+
+
+    if(score>=70){
+
+        css="danger";
+        textClass="dangerText";
+        verdict="HIGH RECRUITMENT RISK";
+        icon="🚨";
+
+    }else if(score>=35){
+
+        css="warn";
+        textClass="warnText";
+        verdict="SUSPICIOUS RECRUITMENT RISK";
+        icon="⚠️";
+
+    }else{
+
+        css="safe";
+        textClass="safeText";
+        verdict="LOW RECRUITMENT RISK";
+        icon="✅";
+    }
+
+
+    showAdvertisementResult(
+        verdict,
+        css,
+        textClass,
+        icon,
+        score,
+        foreign,
+        indicators
+    );
+
+}
+
+
+/* =====================================================
+INSUFFICIENT INFORMATION
+===================================================== */
+
+function showInsufficient(){
+
+    result.className="result info";
+
+    result.style.display="block";
+
+    result.innerHTML=
+
+    `<div class="status infoText">
+        ℹ️ INSUFFICIENT JOB INFORMATION
+    </div>
+
+    <div class="score infoText">
+        0/100
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Verification Type</div>
+        <div class="value">
+            Not detected as a job advertisement
+        </div>
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Job Portal</div>
+        <div class="value">NO</div>
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Foreign Employment</div>
+        <div class="value">NOT DETECTED</div>
+    </div>
+
+    <div class="indicator low">
+        ✅ No recruitment-risk indicators detected.
+    </div>
+
+    <div class="note">
+        The submitted text does not contain enough
+        job-related information for recruitment-risk analysis.
+    </div>`;
+}
+
+
+/* =====================================================
+DISPLAY AD RESULT
+===================================================== */
+
+function showAdvertisementResult(
+    verdict,
+    css,
+    textClass,
+    icon,
+    score,
+    foreign,
+    indicators
+){
+
+    let indicatorHTML="";
+
+
+    if(indicators.length===0){
+
+        indicatorHTML=
+        `<div class="indicator low">
+        ✅ No major risk indicator detected.
+        </div>`;
+
+    }else{
+
+        indicators.forEach(function(item){
+
+            indicatorHTML+=
+            `<div class="indicator ${item[2]}">
+                ${item[0]} ${item[1]}
+            </div>`;
+
+        });
+
+    }
+
+
+    result.className="result "+css;
+
+    result.style.display="block";
+
+
+    result.innerHTML=
+
+    `<div class="status ${textClass}">
+        ${icon} ${verdict}
+    </div>
+
+    <div class="score ${textClass}">
+        ${score}/100
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Verification Type</div>
+        <div class="value">Job Advertisement</div>
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Job Portal</div>
+        <div class="value">NO</div>
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Foreign Employment</div>
+        <div class="value">
+            ${foreign?"YES":"NOT DETECTED"}
+        </div>
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Risk Indicators</div>
+        <div class="value">
+            ${indicatorHTML}
+        </div>
+    </div>
+
+    <div class="note">
+        Offline analysis complete.<br>
+        This is a risk assessment, not a guarantee
+        that a job is genuine.
+    </div>
+
+    <div class="actions">
+
+        <a class="emigrate"
+        href="https://emigrate.gov.in/"
+        target="_blank"
+        rel="noopener noreferrer">
+        🇮🇳 CHECK ON eMIGRATE
+        </a>
+
+        <a class="report"
+        href="https://www.madad.gov.in/madad/GrievantRegistration"
+        target="_blank"
+        rel="noopener noreferrer">
+        🚨 REPORT FAKE AGENT
+        </a>
+
+    </div>`;
+}
+
+
+/* =====================================================
+WEBSITE VERIFY
+===================================================== */
+
+websiteButton.onclick=function(){
+
+    let value=websiteURL.value.trim();
+
+
+    if(!value){
+
+        showMessage(
+            "⚠️",
+            "Please enter a website URL."
+        );
+
+        return;
+    }
+
+
+    if(!/^https?:\/\//i.test(value)){
+
+        value="https://"+value;
+    }
+
+
+    let url;
+
+
+    try{
+
+        url=new URL(value);
+
+    }catch(error){
+
+        showMessage(
+            "❌",
+            "Invalid website URL."
+        );
+
+        return;
+    }
+
+
+    const government=
+    isGovernmentDomain(url.hostname);
+
+
+    verifyWebsite(url,government);
+};
+
+
+/* =====================================================
+WEBSITE CHECK
+===================================================== */
+
+async function verifyWebsite(url,government){
+
+    result.className="result info";
+
+    result.style.display="block";
+
+    result.innerHTML=
+    `<div class="status infoText">
+    ⏳ CHECKING WEBSITE...
+    </div>`;
+
+
+    try{
+
+        await fetch(
+            url.href,
+            {
+                method:"HEAD",
+                mode:"no-cors"
+            }
+        );
+
+
+        showWebsiteResult(
+            url,
+            government,
+            true
+        );
+
+    }catch(error){
+
+        showWebsiteResult(
+            url,
+            government,
+            false
+        );
+
+    }
+}
+
+
+/* =====================================================
+WEBSITE RESULT
+===================================================== */
+
+function showWebsiteResult(
+    url,
+    government,
+    reachable
+){
+
+    let score;
+    let css;
+    let textClass;
+    let verdict;
+
+
+    /*
+    IMPORTANT:
+
+    .gov.in NEVER automatically receives
+    a SAFE score.
+    */
+
+
+    if(government){
+
+        if(reachable){
+
+            score=50;
+            css="gov";
+            textClass="govText";
+
+            verdict=
+            "GOVERNMENT DOMAIN FORMAT DETECTED — UNVERIFIED";
+
+        }else{
+
+            score=75;
+            css="danger";
+            textClass="dangerText";
+
+            verdict=
+            "GOVERNMENT DOMAIN COULD NOT BE VERIFIED";
+        }
+
+    }else{
+
+        if(reachable){
+
+            score=40;
+            css="warn";
+            textClass="warnText";
+
+            verdict=
+            "WEBSITE REACHABLE — NOT GOVERNMENT VERIFIED";
+
+        }else{
+
+            score=70;
+            css="danger";
+            textClass="dangerText";
+
+            verdict=
+            "WEBSITE COULD NOT BE REACHED";
+        }
+    }
+
+
+    result.className="result "+css;
+
+    result.style.display="block";
+
+
+    result.innerHTML=
+
+    `<div class="status ${textClass}">
+        ${government?"🇮🇳":"⚠️"} ${verdict}
+    </div>
+
+    <div class="score ${textClass}">
+        ${score}/100
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Website</div>
+        <div class="value">
+            ${escapeHTML(url.hostname)}
+        </div>
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Government Domain Format</div>
+        <div class="value">
+            ${government?"YES":"NO"}
+        </div>
+    </div>
+
+    <div class="infoRow">
+        <div class="label">Website Reachability</div>
+        <div class="value">
+            ${reachable?
+            "REQUEST ATTEMPTED":
+            "COULD NOT BE REACHED"}
+        </div>
+    </div>
+
+    <div class="note">
+        ⚠️ A .gov.in ending alone does NOT prove
+        that a website is official or trustworthy.
+        <br><br>
+        Offline mode cannot independently verify
+        government ownership.
+    </div>
+
+    <div class="actions">
+
+        <a class="emigrate"
+        href="https://emigrate.gov.in/"
+        target="_blank">
+        🇮🇳 CHECK ON eMIGRATE
+        </a>
+
+        <a class="report"
+        href="https://www.madad.gov.in/madad/GrievantRegistration"
+        target="_blank">
+        🚨 REPORT FAKE AGENT
+        </a>
+
+    </div>`;
+}
+
+
+/* =====================================================
+GOVERNMENT DOMAIN FORMAT
+===================================================== */
+
+function isGovernmentDomain(hostname){
+
+    const host=
+    hostname
+    .toLowerCase()
+    .replace(/^www\./,"");
+
+
+    return(
+        host==="gov.in" ||
+        host.endsWith(".gov.in")
+    );
+}
+
+
+/* =====================================================
+ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+</script>
+
+</body>
+</html>
